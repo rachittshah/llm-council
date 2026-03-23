@@ -31,7 +31,7 @@ export function getProvider(name: ProviderName): ProviderClient {
   const provider = ensureProvider(name);
   if (!provider.isAvailable()) {
     throw new Error(
-      `Provider "${name}" is not available — missing API key`
+      `Provider "${name}" is not available, missing API key`
     );
   }
   return provider;
