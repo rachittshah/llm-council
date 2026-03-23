@@ -1,4 +1,4 @@
-// ── Provider & Model Types ──────────────────────────────────────────
+// Provider & Model Types
 
 export type ProviderName = "openai" | "gemini" | "anthropic";
 
@@ -25,15 +25,15 @@ export interface CompletionResult {
   latencyMs: number;
 }
 
-// ── Council Types ───────────────────────────────────────────────────
+// Council Types
 
-export type Protocol = "vote" | "debate" | "synthesize" | "critique" | "red-team" | "mav";
+export type Protocol = "vote" | "debate" | "synthesize" | "critique" | "redteam" | "mav";
 
 export interface CouncilConfig {
   models: ModelConfig[];
   protocol: Protocol;
   chairman?: ModelConfig; // synthesizer model
-  maxRounds?: number; // for debate (default: 1 — research says don't add rounds)
+  maxRounds?: number; // for debate (default: 1, research says dont add rounds)
   anonymize?: boolean; // hide model identities in peer review
   adaptiveStop?: boolean; // KS-statistic based early stopping
   ksEpsilon?: number; // KS threshold (default: 0.05)
@@ -89,7 +89,7 @@ export interface CouncilResult {
   };
 }
 
-// ── Cost Tracking ───────────────────────────────────────────────────
+// Cost Tracking
 
 export interface CostBreakdown {
   totalUsd: number;
@@ -102,7 +102,7 @@ export interface PricingTier {
   cachedInputPer1M?: number;
 }
 
-// ── Broker / Peer Discovery ─────────────────────────────────────────
+// Broker / Peer Discovery
 
 export interface Peer {
   id: string;
@@ -123,12 +123,12 @@ export interface BrokerMessage {
   delivered: boolean;
 }
 
-// ── Default Configs ─────────────────────────────────────────────────
+// Default Configs
 
 export const DEFAULT_MODELS: ModelConfig[] = [
-  { provider: "openai", model: "gpt-5", label: "Model-A" },
-  { provider: "gemini", model: "gemini-2.5-pro", label: "Model-B" },
-  { provider: "anthropic", model: "claude-sonnet-4-6-20250514", label: "Model-C" },
+  { provider: "openai", model: "gpt-5.4", label: "ModelA" },
+  { provider: "gemini", model: "gemini-2.5-pro", label: "ModelB" },
+  { provider: "anthropic", model: "claude-sonnet-4-6-20250514", label: "ModelC" },
 ];
 
 export const DEFAULT_CHAIRMAN: ModelConfig = {
@@ -139,6 +139,7 @@ export const DEFAULT_CHAIRMAN: ModelConfig = {
 
 export const PRICING: Record<string, PricingTier> = {
   "gpt-5": { inputPer1M: 1.25, outputPer1M: 10.0, cachedInputPer1M: 0.125 },
+  "gpt-5.4": { inputPer1M: 2.0, outputPer1M: 10.0 },
   "gpt-5-mini": { inputPer1M: 0.25, outputPer1M: 1.0 },
   "o3": { inputPer1M: 2.0, outputPer1M: 8.0 },
   "o4-mini": { inputPer1M: 1.1, outputPer1M: 4.4 },
